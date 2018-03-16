@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>首页</title>
+    <script type="text/javascript" src="$!{rc.contextPath}/static/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<p>Hello, $!{name}</p>
+<p>$!date.format('yyyy-MM-dd HH:mm:ss',$!{time})</p>
+<p>
+    <a href="javascript:void(0);" onclick="window.location.href='/main/getValue/'+'heihei?code='+'$!{name}'">get方法的链接</a>
+    <br/>
+    <a href="javascript:void(0);" onclick="postMethod('$!{name}')">post方法的链接</a>
+</p>
+
+<form class="cmxform" id="commentForm" method="get" action="">
+    <fieldset>
+        <legend>Please provide your name, email address (won't be published) and a comment</legend>
+        <p>
+            <label for="cname">Name (required, at least 2 characters)</label>
+            <input id="cname" name="name" minlength="2" type="text" required>
+        </p>
+        <p>
+            <label for="cemail">E-Mail (required)</label>
+            <input id="cemail" type="email" name="email" required>
+        </p>
+        <p>
+            <label for="curl">URL (optional)</label>
+            <input id="curl" type="url" name="url">
+        </p>
+        <p>
+            <label for="ccomment">Your comment (required)</label>
+            <textarea id="ccomment" name="comment" required></textarea>
+        </p>
+        <p>
+            <input class="submit" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+
+<script language="javascript" type="text/javascript">
+    $().ready(function() {
+        $("#commentForm").validate();
+    });
+
+    function postMethod(data) {
+        var params = {
+            message : data
+        };
+        httpPost("$!{rc.contextPath}/main/postValue", params);
+    }
+
+    function httpPost(url, params) {
+        var temp = document.createElement("form");
+        temp.action = url;
+        temp.method = "post";
+        temp.style.display = "none";
+
+        for (var x in params) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = params[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+</script>
+</body>
+
+</html>

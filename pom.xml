@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.me.code</groupId>
+    <artifactId>project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <name>ali</name>
+            <email>zhull_alice@163.com</email>
+            <url>https://github.com/zhull</url>
+        </developer>
+    </developers>
+    <!-- 贡献者 -->
+    <contributors>
+        <contributor>
+            <name>ali</name>
+            <email>zhull_alice@163.com</email>
+            <url>https://github.com/zhull</url>
+        </contributor>
+    </contributors>
+
+    <modules>
+        <module>project-web</module>
+        <module>project-dao</module>
+        <module>project-service</module>
+        <module>project-common</module>
+    </modules>
+
+    <properties>
+        <!-- 第三方jar包 -->
+        <junit.version>4.12</junit.version>
+        <lombok.version>1.16.18</lombok.version>
+        <groovy.version>1.16.18</groovy.version>
+        <spring.boot.version>1.5.7.RELEASE</spring.boot.version>
+        <mybatis.spring.boot.version>1.3.1</mybatis.spring.boot.version>
+        <druid.version>1.0.12</druid.version>
+        <guava.version>19.0</guava.version>
+        <velocity.version>1.4.7.RELEASE</velocity.version>
+
+        <!-- 插件管理 start -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <plugin.maven.compiler.version>3.3</plugin.maven.compiler.version>
+        <plugin.maven.deploy.version>2.8.2</plugin.maven.deploy.version>
+        <plugin.maven.resources.version>3.0.2</plugin.maven.resources.version>
+        <plugin.maven.javadoc.version>3.0.0-M1</plugin.maven.javadoc.version>
+        <plugin.maven.source.version>3.0.1</plugin.maven.source.version>
+        <!-- 插件管理 end -->
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 项目内部 -->
+            <dependency>
+                <groupId>com.me.code</groupId>
+                <artifactId>project-common</artifactId>
+                <version>${common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.me.code</groupId>
+                <artifactId>project-dao</artifactId>
+                <version>${dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.me.code</groupId>
+                <artifactId>project-service</artifactId>
+                <version>${service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.me.code</groupId>
+                <artifactId>project-web</artifactId>
+                <version>${web.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/junit/junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy</artifactId>
+                <version>${groovy.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- springBoot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+                <common.version>1.0-SNAPSHOT</common.version>
+                <dao.version>1.0-SNAPSHOT</dao.version>
+                <service.version>1.0-SNAPSHOT</service.version>
+                <web.version>1.0-SNAPSHOT</web.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- 插件管理 -->
+    <build>
+        <!-- 可以用maven控制激活的profile，在配置文件中@env@引用 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <!-- Maven默认安装的插件，这里只是修改一些默认属性，和声明版本，子pom不需要声明 start -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${plugin.maven.compiler.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <!-- 指定编码格式，否则在DOS下运行mvn compile命令时会默认使用GBK编码 -->
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
