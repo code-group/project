@@ -2,6 +2,8 @@ package com.me.code.project.service.vo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author zhull
  * @date 2018/3/15
@@ -26,4 +28,9 @@ public class UserResVo {
      *
      */
     private String name;
+
+    /**
+     * 时间
+     */
+    private Date time;
 }
