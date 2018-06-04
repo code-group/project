@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>测试异常</title>
+    <script type="text/javascript" src="$!{rc.contextPath}/static/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <input type="button" onclick="baseEx()" value="自定义异常"/>
+    <p>
+        <span id="resp"/>
+    </p>
+</body>
+
+<script language="JavaScript" type="text/javascript">
+    function baseEx() {
+        $.ajax({
+            type : "POST",
+            url : "/ex/baseEx",
+            cache : false,
+            dataType : "text",
+            success : function (data) {
+                $("#resp").text(data);
+            }
+        });
+    }
+</script>
+
+</html>

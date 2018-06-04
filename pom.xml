@@ -44,6 +44,7 @@
         <druid.version>1.0.12</druid.version>
         <guava.version>19.0</guava.version>
         <velocity.version>1.4.7.RELEASE</velocity.version>
+        <net.sf.version>2.4</net.sf.version>
 
         <!-- 插件管理 start -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -142,6 +143,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <classifier>jdk15</classifier>
+                <version>${net.sf.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
