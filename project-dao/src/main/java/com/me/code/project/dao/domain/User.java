@@ -22,4 +22,13 @@ public class User {
      */
     private String name;
 
+    /**
+     * <pre>
+     * 状态
+     * 表字段： USER.STATUS
+     * </pre>
+     *
+     */
+    private Byte status;
+
 }

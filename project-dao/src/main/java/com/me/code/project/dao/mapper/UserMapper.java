@@ -43,4 +43,9 @@ public interface UserMapper {
      * mysql有最大sql长度限制，建议1000条执行一次，用事务控制
      */
 
+
+    /**
+     * 根据状态更新
+     */
+    int updateByStatus(User user);
 }

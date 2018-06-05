@@ -1,5 +1,7 @@
 package com.me.code.project.test;
 
+import com.me.code.project.dao.domain.User;
+import com.me.code.project.dao.mapper.UserMapper;
 import com.me.code.project.service.UserService;
 import com.me.code.project.service.data.Page;
 import com.me.code.project.service.vo.UserOrderResVo;
@@ -30,6 +32,8 @@ public class UserTest {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     public void testQueryPage() {
@@ -44,4 +48,13 @@ public class UserTest {
         log.info("{}", resVos);
     }
 
+    @Test
+    public void testUpdate() {
+        User user = new User();
+        user.setId(1);
+        user.setStatus((byte) 1);
+        user.setName("小明");
+        int result = userMapper.updateByStatus(user);
+        System.out.println(result);
+    }
 }
