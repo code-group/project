@@ -6,3 +6,6 @@ Swagger2<br/>
 Mybatis<br/>
 Velocity<br/>
 JQuery<br/>
+SpringRetry<br/>
+ControllerAdvice<br/>
+JavaMailSender<br/>

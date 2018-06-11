@@ -23,7 +23,8 @@ public class GlobalExceptionHandler {
      * ajax返回
      */
     @ExceptionHandler(value = {BaseException.class})
-    public @ResponseBody String baseExceptionHandler(BaseException e) {
+    @ResponseBody
+    public String baseExceptionHandler(BaseException e) {
         log.error("{}", LOG_PREFIX, e);
 
 //        return "{'code':-1}";

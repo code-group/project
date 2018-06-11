@@ -37,7 +37,6 @@
         <!-- 第三方jar包 -->
         <junit.version>4.12</junit.version>
         <lombok.version>1.16.18</lombok.version>
-        <groovy.version>1.16.18</groovy.version>
         <spring.boot.version>1.5.7.RELEASE</spring.boot.version>
         <io.springfox.version>2.7.0</io.springfox.version>
         <mybatis.spring.boot.version>1.3.1</mybatis.spring.boot.version>
@@ -95,12 +94,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy</artifactId>
-                <version>${groovy.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
@@ -144,12 +137,16 @@
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>net.sf.json-lib</groupId>
                 <artifactId>json-lib</artifactId>
                 <classifier>jdk15</classifier>
                 <version>${net.sf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

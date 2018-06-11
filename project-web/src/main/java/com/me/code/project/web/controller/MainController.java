@@ -26,7 +26,7 @@ public class MainController extends BaseController {
     @RequestMapping("/index")
     public ModelAndView goIndex(HttpServletRequest request) {
         log.info("进入首页...");
-        Map<String, Object> map = new HashMap(1);
+        Map<String, Object> map = new HashMap<>(1);
         map.put("name", "ali");
         map.put("time", new Date());
         return new ModelAndView("index", map);
