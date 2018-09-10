@@ -4,6 +4,7 @@ import com.me.code.project.dao.domain.User;
 import com.me.code.project.dao.mapper.UserMapper;
 import com.me.code.project.service.UserService;
 import com.me.code.project.service.data.Page;
+import com.me.code.project.service.util.LogUtil;
 import com.me.code.project.service.vo.UserOrderResVo;
 import com.me.code.project.service.vo.UserReqVo;
 import com.me.code.project.service.vo.UserResVo;
@@ -56,5 +57,10 @@ public class UserTest {
         user.setName("小明");
         int result = userMapper.updateByStatus(user);
         System.out.println(result);
+    }
+
+    @Test
+    public void testLogUtil() {
+        LogUtil.exec(LogUtil::print, "haha", "测试程序2");
     }
 }

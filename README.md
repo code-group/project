@@ -9,3 +9,4 @@ JQuery<br/>
 SpringRetry<br/>
 ControllerAdvice<br/>
 JavaMailSender<br/>
+LogUtil 日志包裹<br/>
