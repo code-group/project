@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>表格的展开与折叠</title>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js">
+    </script>
+    <script>
+        $(function () {
+            $('tr.parent').each(function () {
+                $('.child-' + this.id).hide();
+            });
+            $('tr.parent')
+                .css("cursor", "pointer")
+                .click(function () {
+                    if ($('.child-' + this.id).is(":hidden")) {
+                        $('#action-' + this.id).text("隐藏");
+                    } else {
+                        $('#action-' + this.id).text("展开");
+                    }
+                    $('.child-' + this.id).toggle();
+                });
+        });
+    </script>
+    <style>
+        table.detail, table.detail td, table.detail th {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+<table id="detail_table" class="detail">
+    <col style="width:40px;">
+    <col style="width:80px;">
+    <col style="width:150px;">
+    <col style="width:40px;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th colspan="2">Name</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="parent" id="row123">
+        <td>123</td>
+        <td colspan="1">关闭1</td>
+        <td>100</td>
+        <td><span id="action-row123">展开</span></td>
+    </tr>
+    <tr class="child-row123">
+        <td></td>
+        <td>2007-01-02</td>
+        <td>A short description</td>
+        <td>15</td>
+    </tr>
+    <tr class="child-row123">
+        <td></td>
+        <td>2007-02-03</td>
+        <td>Another description</td>
+        <td>45</td>
+    </tr>
+    <tr class="child-row123">
+        <td></td>
+        <td>2007-03-04</td>
+        <td>More Stuff</td>
+        <td>40</td>
+    </tr>
+    <tr class="parent" id="row456">
+        <td>456</td>
+        <td>关闭2</td>
+        <td>50</td>
+        <td><span id="action-row456">展开</span></td>
+    </tr>
+    <tr class="child-row456">
+        <td></td>
+        <td>2007-01-02</td>
+        <td>A short description</td>
+        <td>10</td>
+    </tr>
+    <tr class="child-row456">
+        <td></td>
+        <td>2007-02-03</td>
+        <td>Another description</td>
+        <td>20</td>
+    </tr>
+    <tr class="child-row456">
+        <td></td>
+        <td>2007-03-04</td>
+        <td>More Stuff</td>
+        <td>20</td>
+    </tr>
+    <tr class="parent" id="row789">
+        <td>789</td>
+        <td colspan="2">关闭3</td>
+        <td>75</td>
+    </tr>
+    <tr class="child-row789">
+        <td></td>
+        <td>2007-01-02</td>
+        <td>A short description</td>
+        <td>33</td>
+    </tr>
+    <tr class="child-row789">
+        <td></td>
+        <td>2007-02-03</td>
+        <td>Another description</td>
+        <td>22</td>
+    </tr>
+    <tr class="child-row789">
+        <td></td>
+        <td>2007-03-04</td>
+        <td>More Stuff</td>
+        <td>20</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
