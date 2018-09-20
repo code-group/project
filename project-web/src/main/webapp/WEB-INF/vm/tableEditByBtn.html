@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        tr{height: 20px;width: 300px;}
+        td{width: 150px;}
+        .hid{display: none;}
+    </style>
+</head>
+<body>
+<table border="1px" cellspacing="0">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>tom</td>
+        <td>18</td>
+        <td>男</td>
+        <td>
+            <button class="add">添加</button>
+            <button class="update">修改</button>
+            <button class="del">删除</button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>jone</td>
+        <td>28</td>
+        <td>男</td>
+        <td>
+            <button class="add">添加</button>
+            <button class="update">修改</button>
+            <button class="del">删除</button>
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>lily</td>
+        <td>21</td>
+        <td>女</td>
+        <td>
+            <button class="add">添加</button>
+            <button class="update">修改</button>
+            <button class="del">删除</button>
+        </td>
+    </tr>
+    <tr class="hid">
+        <td></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td>
+            <button class="add">添加</button>
+            <button class="update">修改</button>
+            <button class="del">删除</button>
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript" src="../../static/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    function resetIndex(){
+//计算序号
+        $("tr>td:first-child").each(function(index,element){
+            $(this).html(index+1)
+        })
+    }
+    //点击添加
+    $(".add").click(function(){
+        //01 克隆
+        var $tr = $(".hid").clone(true);
+        //disply=block
+        $tr.removeClass("hid");
+        //把修改按钮的值为保存
+        $tr.find("button:contains(修改)").html("保存");
+        //02 after()
+        $(this).closest("tr").after($tr);
+        resetIndex();
+    })
+    //点击修改
+    $(".update").click(function(){
+        //可操作的全部区域
+        var $tds = $(this).parents("tr").children("td").not(":first,:last");
+        //点击修改按钮的时候，先判定是修改还是保存
+        var $content = $(this).html();
+        if ($content=="修改") {
+            //如果是修改,给每个操作的td添加一个input标签
+            $tds.each(function(){
+                $(this).html("<input type='text' value='"+$(this).html()+"'>")
+            });
+            $(this).html("保存")
+        }else{
+            //如果是保存,将修改的内容保存下来
+            $tds.each(function(){
+                var contentIn= $(this).children("input").val()
+                $(this).html(contentIn);
+            });
+            $(this).html("修改")
+        }
+    })
+    //点击删除
+    $(".del").click(function(){
+        $(this).parents("tr").remove();//将对应的一行删除
+        resetIndex();
+    })
+</script>
+
+</body>
+</html>
