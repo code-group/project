@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>百宝箱</title>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js">
+    </script>
+    <script>
+        function onlyNum(obj) {
+            obj.value = obj.value.replace(/[^\- \d.]/g, ""); //清除"数字"和"."以外的字符
+            obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字而不是
+            obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+            obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+            obj.value = obj.value.replace(/\-{2,}/g, "-"); //只保留第一个- 清除多余的
+            obj.value = obj.value.replace("-", "$#$").replace(/\-/g, "").replace("$#$", "-");
+        }
+
+        function onlyDigit(obj) {
+            if (obj.value.length == 1) {
+                obj.value = obj.value.replace(/[^1-9]/g, '');
+            } else {
+                obj.value = obj.value.replace(/\D/g, '');
+            }
+            obj.value = obj.value.replace(/\b(0+)/gi, "");
+        }
+
+        function checkEmail(val) {
+
+            val = val.value;
+
+            var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+            if (val === "") { //输入不能为空
+                alert("输入不能为空!");
+                return false;
+            } else if (!reg.test(val)) { //正则验证不通过，格式不对
+                console.log("验证不通过!");
+                return false;
+            } else {
+                console.log("通过！");
+                return true;
+            }
+        }
+
+        function submitFormdata() {
+            var formData = new FormData($("#formId")[0]);
+
+            jQuery.ajax({
+                type: "POST",
+                url: "$!{rc.contextPath}/apply/order/entry/apply",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    // do something
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    var msg = JSON.parse(XMLHttpRequest.responseText).message;
+                }
+            });
+        }
+
+        // 校验文件是否上传
+        function invalidFile(id) {
+
+            // 用jQuery取有问题
+            return document.getElementById(id).files.length === 0;
+        }
+        
+        // 检查文件后缀
+        function checkPostfix() {
+            
+        }
+    </script>
+</head>
+
+<body>
+<p>只可输入正整数</p>
+<input type="text" value=""
+       onkeyup="checkEmail(this)"
+/>
+<!-- onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}" -->
+</body>
+</html>

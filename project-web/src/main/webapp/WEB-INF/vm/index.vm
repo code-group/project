@@ -33,6 +33,7 @@
         <span style="color:red">可见或不可见的内容~~</span>
     </div>
 </p>
+
 <form class="cmxform" id="commentForm" method="get" action="">
     <fieldset>
         <legend>Please provide your name, email address (won't be published) and a comment</legend>
@@ -135,7 +136,6 @@
                 $("#nums").html("");
                 $("#nums").append($("<option value=\"\">-请选择－</option>"));
                 $.each(data, function (i, item) {
-                    var arr = item;
                     $("#nums").append($("<option value=\""+item+"\">"+item+"</option>"));
                 });
             },
